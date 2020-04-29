@@ -179,6 +179,18 @@ if(cluster.isMaster){
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(expressValidator());
 
+    if(process.env.ALLOW_COR == 'true'){
+      app.use(function(req, res, next) {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
+        res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, OPTIONS');
+        res.setHeader('Cache-Control', 'no-cache');
+
+        next();
+      });
+    }
+
+
     app.use(express.static(path.join(__dirname, 'public'), {maxAge: 31557600000}));
 
     app.use(express.static(path.join(__dirname, 'hls'), {}));
