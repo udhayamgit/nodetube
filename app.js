@@ -172,7 +172,8 @@ if(cluster.isMaster){
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
         res.setHeader('Access-Control-Allow-Methods', 'PUT, GET, POST, OPTIONS');
-        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Cache-Control', 'public, max-age=3600');
+        res.setHeader('Access-Control-Expose-Headers', 'origin, range');
 
         next();
       });
