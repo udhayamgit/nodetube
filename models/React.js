@@ -19,7 +19,7 @@ const reactSchema = new mongoose.Schema({
   },
   react: {
     type: String,
-    enum: ['like', 'dislike', 'laugh', 'sad', 'disgust', 'love']
+    enum: ['like', 'dislike' /* , 'laugh', 'sad', 'disgust', 'love' */ ]
   },
   active: {
     type: Boolean

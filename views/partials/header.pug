@@ -13,11 +13,20 @@ style.
     background-color: transparent;
   }
 
+  body {
+    background-color: #0B0B0C; //#181817; //#292322; //rgb(40,44,52); rgb(33,37,43);
+    color:#ffffff;
+  }
+
+  #darkMode {
+    color: white;
+  }
+
   .brandName {
     font-size:19px;
   }
 
-.navbar.navbar-default.navbar-fixed-top(style="background-color:rgb(24,55,147)")
+.navbar.navbar-default.navbar-fixed-top(style="background-color:#18181A;")
   .container
     .navbar-header
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -91,8 +100,6 @@ style.
                 li
                   a.dropdown-anchors(href=`/admin/dailyStats`) Daily Stats
 
-                li(class=(title == 'Uploads') ? 'active' : undefined)
-                  a.dropdown-anchors(href=`/admin/uploads`) Uploads
                 li(class=(title == 'Users') ? 'active' : undefined)
                   a.dropdown-anchors(href=`/admin/users`) Users
                 li(class=(title == 'Comments') ? 'active' : undefined)
@@ -116,6 +123,9 @@ style.
         //  a(href=`/features`) Features
         li(class=(title == 'About') ? 'active' : undefined)
           a(href=`/about`) About
+        
+        //li(class=(title == 'Dark'))
+            button(onClick="darkMode()") Dark Mode
 
         // if user not logged in
         if !user
@@ -133,6 +143,8 @@ style.
             a(href=`/user/` + user.channelUrl) My Channel
           li.hidden-md.hidden-lg.hidden-sm
             a(href=`/account`) My Account
+          li(class=(title == 'Upload') ? 'active' : undefined)
+            a(href=`/upload`) Upload
           li.hidden-md.hidden-lg.hidden-sm
             a(href=`/logout`) Logout
           li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
