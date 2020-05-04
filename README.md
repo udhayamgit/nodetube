@@ -1,3 +1,6 @@
+## Important
+This branch is a front end redesign. This includes dark/light mode changeable in views/partials/header.pug, we are working on toggleing with local storage. This also includes a redesigned video/image page with recommended videos. There are still some coloring bugs, etc. that need to be fixed with darkmode.
+
 # NodeTube
 NodeTube is an open-source YouTube alt that offers video, audio and image uploads, livestreaming and built-in monetization
 
