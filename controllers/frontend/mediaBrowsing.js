@@ -678,9 +678,9 @@ exports.suggested = async(req, res) => {
 
   // console.log(`WITHIN: ${within}`);
 
-  let displayObject = [{ withinString: '1hour', englishString: 'Last Hour' }, { withinString : '24hour', englishString: 'Last Day'},
-    {withinString: '1week', englishString: 'Last Week'}
-    , { withinString: '1month', englishString: 'Last Month' }, { withinString: 'alltime', englishString: 'All Time' }];
+  let displayObject = [{ withinString: '1hour', englishString: '' }, { withinString : '24hour', englishString: ''},
+    {withinString: '1week', englishString: ''}
+    , { withinString: '1month', englishString: '' }, { withinString: 'alltime', englishString: '' }];
 
   // used for 'views per these returned items
   function calculateViewAmount(uploads){
@@ -704,19 +704,19 @@ exports.suggested = async(req, res) => {
   try {
 
     switch(englishString){
-    case'Last Hour':
+    case'':
       viewAmountInPeriod = viewStats.hour;
       break;
-    case'Last Day':
+    case' ':
       viewAmountInPeriod = viewStats.day;
       break;
-    case'Last Week':
+    case'  ':
       viewAmountInPeriod = viewStats.week;
       break;
-    case'Last Month':
+    case'   ':
       viewAmountInPeriod = viewStats.month;
       break;
-    case'All Time':
+    case'    ':
       viewAmountInPeriod = viewStats.alltime;
       break;
     }
@@ -754,7 +754,7 @@ exports.suggested = async(req, res) => {
       withinDisplayString = 'last week';
     } else if(within == '1month'){
       withinDisplayString = 'last month';
-    }
+    } 
 
     withinDisplayString = 'views ' + withinDisplayString;
 

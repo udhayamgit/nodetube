@@ -1,54 +1,12 @@
-extends ../layout
+extends ../layoutEmbed
 
 block content
-
-    div.container
-        include ../viewPartials/popularUploadsNavbar
-
-    // show view amount and time period like: Last Day (294)
-    h2.fw.center-block.text-center #{englishString} (#{viewAmountInPeriod})
-
-    // it's a pretty big change so turn off for now
-    if category & 1 == 2
-        h3.center-block.text-center Views On This Page: (#{viewsOnThisPage})
-
-    div.container
-
-        h2.center-block.text-center #{timeAgoEnglish}
-
-        div.center-block.text-center.col-sm-12
-
-
-            br
-
-            //br
-
-            // Non-video stuff (orderBy, sensitivity dropdowns,
-
-            // CATEGORY DROPDOWN
-            div.search-upload-buttons-container
-                include ../viewPartials/categoryDropdown
-
-                include ../viewPartials/popularUploadsMediaDropdown
-
-                include ../viewPartials/sensitivityFilterDropdown
-
-
-        include ../viewPartials/popularUploadsPagination
-
-
-        br
+    div.container(style="background-color:transparent !important;")
+        // include ../viewPartials/categoryDropdown
+        h3(style="text-align:center !important;") Recommended For You
         div.uploads
-            // CATEGORY OVERVIEW PAGE IF NOT A CATEGORY
             if !isACategory || category == 'overview'
-                include ../viewPartials/categoryOverviews
-
             else
-
-                div.category.col-sm-12
-                    h1.fw.categoryDisplayName(style="font-size:42px") #{categoryObj.displayName}
-                    br
-
 
                 each upload in uploads
                     div.col-xs-12.col-sm-6.col-md-6.col-lg-4(style="text-align:center;height:353px;")
@@ -56,19 +14,7 @@ block content
                         include ../viewPartials/uploadThumbnail
 
                         include ../viewPartials/uploadDetails
-
-                        // include ../viewPartials/uploadDetailsPopular
-
-
-            //include ../viewPartials/adminSensitivityButtons
-
-
     if uploads
-
-        include ../viewPartials/popularUploadsPagination
-
-
-
     script.
       $(document).ready(function (event) {
 
@@ -168,10 +114,5 @@ block content
         });
       });
 
-
-    include ../viewPartials/changeSensitivityFilterJs
-
     script.
       balanceText();
-
-    include ../viewPartials/mouseOverJavascript

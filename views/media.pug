@@ -8,10 +8,22 @@ block content
             margin: 0 auto;
             margin-top: 30px;
         }
+        @media only screen and (max-width: 880px) {
+            #suggested {
+                display: none;
+            }
+        }
+        .row {
+            display: flex;
+        }
+
+        .column {
+            flex: 40%;
+        }
 
 
     br
-    div(style="margin-left:10px;text-align:left;").center-block.text-center.col-sm-12
+    div(style="margin-left:10px;text-align:left;")
         if upload.status == 'processing'
 
             div(style="max-width:443px;margin:0 auto;")
@@ -120,9 +132,8 @@ block content
             if upload.visibility == 'pending' && upload.status !== 'processing'
                 h3.pending-string Your video is currently pending moderator approval. If it's still pending after several minutes please contact a mod at
                     a(href="/discord")  Discord
-
-
-            div(style="margin-left:10px;text-align:left;").center-block.text-center.col-sm-6
+        div(class="row")
+            div(style="margin-left:10px;text-align:left;" class="column")
                 // uploader byline
                 h3.uploader-name(style="margin-top:25px;font-size:26px;")
                     //if upload.uploader.customThumbnail
@@ -139,7 +150,7 @@ block content
                             br
                     if upload.uploader.customThumbnail
                         img(src=`${uploadServer}/${upload.uploader.channelUrl}/${upload.uploader.customThumbnail}` style="border-radius:25px;width:45px;height:45px;margin-right:10px;")
-                    a(href=`/user/${upload.uploader.channelUrl}` style="color:rgb(51, 51, 51);font-weight:300;") #{upload.uploader.channelName || upload.uploader.channelUrl}
+                    a(href=`/user/${upload.uploader.channelUrl}` style="color:darkgray;font-weight:300;") #{upload.uploader.channelName || upload.uploader.channelUrl}
                     
                         if upload.uploader.verified == true
                             img(src="/images/verified.jpg" width="25px" height="25px" style="margin-left:3px;margin-top:-2px;margin-right:5px;")
@@ -241,7 +252,7 @@ block content
                     if upload.description
                         h4.fw(class="upload-description-value" style="font-size:15px;font-weight:bold;") description:
                         p.fw(style="text-align: left;margin: 0 auto;white-space:pre-line;word-wrap:break-word;min-width:240px;" id="descriptionText") #{upload.description}
-
+                    hr
                     br
                     br
 
@@ -264,16 +275,22 @@ block content
                     i.fa.fa-info.fw
                     | With User Info
 
-                // COMMENT SECTION AND FORM
-                div
-                    br
-                    br
-                    br
-                    div.col-sm-12
-                    if user
-                        if !viewingUserIsBlocked
-                            // comment form
-                            div.comment-form.form-group
+            div(style="margin-right:10px;text-align:right;" id="suggested" class="column")
+                if upload.category
+                    each category in categories
+                        if category.name == upload.category
+                            iframe(style="height:600px;width:550px;border:none;padding-top:0" src=`/media/suggested/?category=${category.name}` target=_self)
+
+
+
+            // COMMENT SECTION AND FORM
+        div(style="ttext-align:center;")
+            br
+            div.col-md-12
+                if user
+                    if !viewingUserIsBlocked
+                        // comment form
+                        div.comment-form.form-group
                                 form.form-horizontal.overall-comment-form(class="comment-form" action='/api/comment', method='post')
                                     input(type='hidden', name='_csrf', value=_csrf)
                                     label.fw(for="comment" style="font-size:20px;") comments
@@ -293,7 +310,6 @@ block content
                                 hr
 
                     // DISPLAY COMMENTS
-
                     // otherwise display all comments
                     if commentCount == 0
                         div.comment-containing-div(style="margin:0 auto;margin-top:70px;")
@@ -376,15 +392,8 @@ block content
                                                         //        input.btn.btn-md.btn-success(type='submit' value="Post Comment")
                                                         //        br
                                                         //        br
-
-
-
-
-
-
                                     else
                                         p No commenter
-
                                     //embed(src="public/popularByReactsEmbed.pug")
 
 
@@ -392,6 +401,8 @@ block content
 
                 //div(style="margin-left:10px;text-align:left;").center-block.text-center.col-sm-18
                         iframe(src="/media/popular")
+
+            
 
 
 block extra_js
